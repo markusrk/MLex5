@@ -47,6 +47,17 @@ def get_normalized():
     x_train, x_test, y_train, y_test = get_train_test_chars74()
     return x_train/255, x_test/255, y_train, y_test
 
+def get_pca(dims=20):
+    x,y = import_chars74k()
+    x = x.reshape((-1, 400))
+
+    from sklearn.decomposition import PCA
+    pca = PCA(n_components=dims)
+    pca.fit(x)
+    x = pca.transform(x)
+    return train_test_split(x,y)
+
+
 def import_for_tf():
     x,y = import_chars74k()
     x = x.reshape((-1,400))

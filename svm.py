@@ -8,10 +8,7 @@ x_test = x_test.reshape((-1, 400))
 y_train = y_train.argmax(axis=1)
 y_test = y_test.argmax(axis=1)
 
-params = {'C': 471.32302370721925,
- 'class_weight': None,
- 'gamma': 0.041419080935991642,
- 'kernel': 'rbf'}
+params = {'C': 290.33546925645066, 'gamma': 0.021298927814621477, 'kernel': 'rbf'}
 
 clf = svm.SVC(**params)
 clf.fit(x_train, y_train)

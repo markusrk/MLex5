@@ -2,9 +2,9 @@ from sklearn import svm
 from sklearn.metrics import classification_report
 import import_handler
 
-x_train, x_test, y_train, y_test = import_handler.get_normalized()
-x_train = x_train.reshape((-1, 400))
-x_test = x_test.reshape((-1, 400))
+x_train, x_test, y_train, y_test = import_handler.get_pca()
+#x_train = x_train.reshape((-1, 400))
+#x_test = x_test.reshape((-1, 400))
 y_train = y_train.argmax(axis=1)
 y_test = y_test.argmax(axis=1)
 
