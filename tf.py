@@ -29,6 +29,8 @@ import tflowtools as TFT
 from copy import deepcopy
 import matplotlib.pyplot as PLT
 
+import import_handler
+
 
 class case_holder:
     def __init__(self, dataset, tfrac=0.1, vfrac=0.1):
@@ -127,8 +129,8 @@ def train(dims=[11, 40, 20, 6],
     val_acc = []
 
     # Import data
-    dataset = getattr(TFT, data_source)(case_count=case_count)
-    mnist = case_holder(dataset, tfrac=tfrac, vfrac=vfrac)
+    dataset = import_handler.import_for_tf()
+    caseHolder = case_holder(dataset, tfrac=tfrac, vfrac=vfrac)
 
     sess = tf.InteractiveSession()
     # Create a multilayer model.
@@ -236,13 +238,13 @@ def train(dims=[11, 40, 20, 6],
     def feed_dict(train):
         """Make a TensorFlow feed_dict: maps data onto Tensor placeholders."""
         if train == "train":
-            xs, ys = mnist.train_next_batch(size=mbs)
+            xs, ys = caseHolder.train_next_batch(size=mbs)
         elif train == 'test':
-            xs, ys = mnist.test_features, mnist.test_labels
+            xs, ys = caseHolder.test_features, caseHolder.test_labels
         elif train == 'val':
-            xs, ys = mnist.validation_features, mnist.validation_labels
+            xs, ys = caseHolder.validation_features, caseHolder.validation_labels
         elif train == 'map':
-            xs, ys = mnist.train_features[:map_bs], mnist.train_labels[:map_bs]
+            xs, ys = caseHolder.train_features[:map_bs], caseHolder.train_labels[:map_bs]
         else:
             raise Exception
         return {x: xs, y_: ys}
@@ -330,8 +332,8 @@ def main(dict):
 if __name__ == '__main__':
     import json
 
-    config_file = 'configs/' + str(input('choose setup file: ')) + '.txt'
-    # config_file = 'configs/test.txt'
+    #config_file = 'configs/' + str(input('choose setup file: ')) + '.txt'
+    config_file = 'configs/test.txt'
     f = open(config_file, 'r')
     dict = json.load(f)
     main(dict)

@@ -10,7 +10,6 @@ def train_test_split(x,y):
     sss.get_n_splits(x, y)
 
     for train_index, test_index in sss.split(x, y):
-        print("TRAIN:", train_index, "TEST:", test_index)
         x_train, x_test = x[train_index], x[test_index]
         y_train, y_test = y[train_index], y[test_index]
     return x_train,x_test,y_train,y_test
@@ -47,6 +46,14 @@ def get_train_test_chars74():
 def get_normalized():
     x_train, x_test, y_train, y_test = get_train_test_chars74()
     return x_train/255, x_test/255, y_train, y_test
+
+def import_for_tf():
+    x,y = import_chars74k()
+    x = x.reshape((-1,400))
+    d = []
+    for i in range(len(x)):
+        d.append([x[i],y[i]])
+    return d
 
 if __name__ == "__main__":
     import_chars74k()

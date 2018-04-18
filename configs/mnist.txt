@@ -1,0 +1,23 @@
+{
+    "acc_lim": 0.95,
+    "activation_func": "tanh",
+    "case_count": null,
+    "cost_func": "CE",
+    "data_source": "gen_mnist_cases",
+    "dendogram_layers": null,
+    "dims": [
+        784,
+        500,
+        10
+    ],
+    "epochs": 10000,
+    "initial_weight_range": "scaled",
+    "lr": 0.005,
+    "map_bs": 25,
+    "map_layers": null,
+    "show_layers": null,
+    "mbs": "full",
+    "softmax": false,
+    "tfrac": 0.1,
+    "vfrac": 0.1
+}
